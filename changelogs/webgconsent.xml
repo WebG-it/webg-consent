@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Changelog feed Joomla per plg_system_webgconsent. Referenziato dal manifest via <changelogurl>. -->
+<changelogs>
+    <changelog>
+        <element>webgconsent</element>
+        <type>plugin</type>
+        <folder>system</folder>
+        <version>1.0.0</version>
+        <addition>
+            <item>First release. Full-page age gate for Joomla sites with content reserved for adults, built in the browser so cached pages stay valid. Works on Joomla 4.4, 5 and 6, with or without YOOtheme.</item>
+            <item>Every visible text comes from the Joomla language files (PLG_SYSTEM_WEBGCONSENT_*, English and Italian) and can be changed with System, Language Overrides. Per-language texts in the plugin settings are optional: an empty field uses the language file.</item>
+            <item>Pseudonymous consent register (random visitor ID, HMAC of the IP, never the IP in clear) with rate limit, 730 days retention and CSV export from the back end.</item>
+        </addition>
+        <security>
+            <item>Signed short-lived token for the log endpoint, rate limits per IP and global, export only for super users, no DDL from public requests.</item>
+        </security>
+    </changelog>
+</changelogs>

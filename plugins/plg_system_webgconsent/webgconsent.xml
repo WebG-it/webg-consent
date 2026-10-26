@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="system" method="upgrade">
+	<name>PLG_SYSTEM_WEBGCONSENT</name>
+	<author>Marco Galassi (WebG)</author>
+	<creationDate>2026-10</creationDate>
+	<copyright>(C) 2026 Marco Galassi / WebG</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<licence>GNU GPL version 2 or later (GPL-2.0-or-later); see LICENSE.txt</licence>
+	<authorEmail>marco.galassi@webg.it</authorEmail>
+	<authorUrl>https://www.webg.it</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_SYSTEM_WEBGCONSENT_XML_DESCRIPTION</description>
+	<namespace path="src">WebG\Plugin\System\Webgconsent</namespace>
+	<scriptfile>script.php</scriptfile>
+	<changelogurl>https://raw.githubusercontent.com/WebG-it/webg-consent/main/changelogs/webgconsent.xml</changelogurl>
+
+	<files>
+		<folder plugin="webgconsent">services</folder>
+		<folder>src</folder>
+		<folder>language</folder>
+		<folder>sql</folder>
+		<filename>script.php</filename>
+		<filename>LICENSE.txt</filename>
+	</files>
+
+	<languages folder="language">
+		<language tag="it-IT">it-IT/plg_system_webgconsent.ini</language>
+		<language tag="it-IT">it-IT/plg_system_webgconsent.sys.ini</language>
+		<language tag="en-GB">en-GB/plg_system_webgconsent.ini</language>
+		<language tag="en-GB">en-GB/plg_system_webgconsent.sys.ini</language>
+	</languages>
+
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+
+	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<config>
+		<fields name="params" addfieldprefix="WebG\Plugin\System\Webgconsent\Field">
+
+			<fieldset name="basic" label="PLG_SYSTEM_WEBGCONSENT_FS_TEXT">
+				<field name="text_version" type="text" default="1" maxlength="24" filter="string"
+					label="PLG_SYSTEM_WEBGCONSENT_F_VERSION" description="PLG_SYSTEM_WEBGCONSENT_F_VERSION_DESC" />
+				<field name="texts" type="subform" multiple="true" min="0" max="30" default=""
+					label="PLG_SYSTEM_WEBGCONSENT_F_TEXTS" description="PLG_SYSTEM_WEBGCONSENT_F_TEXTS_DESC">
+					<form>
+						<field name="lang" type="language" client="site" default="*" label="PLG_SYSTEM_WEBGCONSENT_F_LANG">
+							<option value="*">PLG_SYSTEM_WEBGCONSENT_OPT_ALL</option>
+						</field>
+						<field name="title" type="text" filter="string" label="PLG_SYSTEM_WEBGCONSENT_F_TITLE" />
+						<field name="body" type="textarea" rows="6" cols="60" filter="string"
+							label="PLG_SYSTEM_WEBGCONSENT_F_BODY" description="PLG_SYSTEM_WEBGCONSENT_F_BODY_DESC" />
+						<field name="btn_accept" type="text" filter="string" label="PLG_SYSTEM_WEBGCONSENT_F_BTN_ACCEPT" />
+						<field name="btn_exit" type="text" filter="string" label="PLG_SYSTEM_WEBGCONSENT_F_BTN_EXIT" />
+						<field name="footnote" type="textarea" rows="3" cols="60" filter="string" label="PLG_SYSTEM_WEBGCONSENT_F_FOOTNOTE" />
+						<field name="privacy_url" type="text" filter="string"
+							label="PLG_SYSTEM_WEBGCONSENT_F_ROW_PRIVACY_URL" description="PLG_SYSTEM_WEBGCONSENT_F_ROW_PRIVACY_URL_DESC" />
+						<field name="privacy_label" type="text" filter="string" label="PLG_SYSTEM_WEBGCONSENT_F_PRIVACY_LABEL" />
+					</form>
+				</field>
+				<field name="exit_url" type="url" default="https://www.google.com" filter="url" validate="url"
+					label="PLG_SYSTEM_WEBGCONSENT_F_EXIT_URL" description="PLG_SYSTEM_WEBGCONSENT_F_EXIT_URL_DESC" />
+				<field name="privacy_url" type="text" default="/privacy-policy.html" filter="string"
+					label="PLG_SYSTEM_WEBGCONSENT_F_PRIVACY_URL" description="PLG_SYSTEM_WEBGCONSENT_F_PRIVACY_URL_DESC" />
+			</fieldset>
+
+			<fieldset name="look" label="PLG_SYSTEM_WEBGCONSENT_FS_LOOK">
+				<field name="c_overlay" type="color" default="#0d0d12" label="PLG_SYSTEM_WEBGCONSENT_F_C_OVERLAY" />
+				<field name="overlay_opacity" type="number" default="96" min="50" max="100" step="1" filter="integer"
+					label="PLG_SYSTEM_WEBGCONSENT_F_OVERLAY_OPACITY" />
+				<field name="c_panel" type="color" default="#1c1c24" label="PLG_SYSTEM_WEBGCONSENT_F_C_PANEL" />
+				<field name="c_text" type="color" default="#f2f2f5" label="PLG_SYSTEM_WEBGCONSENT_F_C_TEXT" />
+				<field name="c_accept_bg" type="color" default="#2ec664" label="PLG_SYSTEM_WEBGCONSENT_F_C_ACCEPT_BG" />
+				<field name="c_accept_text" type="color" default="#06210f" label="PLG_SYSTEM_WEBGCONSENT_F_C_ACCEPT_TEXT" />
+				<field name="c_exit_border" type="color" default="#c9c9d1" label="PLG_SYSTEM_WEBGCONSENT_F_C_EXIT_BORDER" />
+				<field name="c_exit_text" type="color" default="#f2f2f5" label="PLG_SYSTEM_WEBGCONSENT_F_C_EXIT_TEXT" />
+			</fieldset>
+
+			<fieldset name="behaviour" label="PLG_SYSTEM_WEBGCONSENT_FS_BEHAVIOUR">
+				<field name="cookie_days" type="number" default="365" min="1" max="730" step="1" filter="integer"
+					label="PLG_SYSTEM_WEBGCONSENT_F_COOKIE_DAYS" description="PLG_SYSTEM_WEBGCONSENT_F_COOKIE_DAYS_DESC" />
+				<field name="cookie_domain" type="text" default="" filter="string"
+					label="PLG_SYSTEM_WEBGCONSENT_F_COOKIE_DOMAIN" description="PLG_SYSTEM_WEBGCONSENT_F_COOKIE_DOMAIN_DESC" />
+				<field name="exclude_paths" type="textarea" rows="4" cols="60" filter="string"
+					default="/privacy-policy.html&#10;/cookie-policy.html"
+					label="PLG_SYSTEM_WEBGCONSENT_F_EXCLUDE" description="PLG_SYSTEM_WEBGCONSENT_F_EXCLUDE_DESC" />
+			</fieldset>
+
+			<fieldset name="register" label="PLG_SYSTEM_WEBGCONSENT_FS_REGISTER">
+				<field name="log_enabled" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="PLG_SYSTEM_WEBGCONSENT_F_LOG_ENABLED">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="retention_days" type="number" default="730" min="30" max="3650" step="1" filter="integer"
+					label="PLG_SYSTEM_WEBGCONSENT_F_RETENTION" description="PLG_SYSTEM_WEBGCONSENT_F_RETENTION_DESC" />
+				<field name="rate_limit" type="number" default="120" min="3" max="1000" step="1" filter="integer"
+					label="PLG_SYSTEM_WEBGCONSENT_F_RATE" description="PLG_SYSTEM_WEBGCONSENT_F_RATE_DESC" />
+				<field name="trust_cf" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="PLG_SYSTEM_WEBGCONSENT_F_TRUST_CF" description="PLG_SYSTEM_WEBGCONSENT_F_TRUST_CF_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="salt" type="text" default="" filter="string"
+					label="PLG_SYSTEM_WEBGCONSENT_F_SALT" description="PLG_SYSTEM_WEBGCONSENT_F_SALT_DESC" />
+				<field name="delete_on_uninstall" type="radio" layout="joomla.form.field.radio.switcher" default="0" filter="integer"
+					label="PLG_SYSTEM_WEBGCONSENT_F_DELETE" description="PLG_SYSTEM_WEBGCONSENT_F_DELETE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="registro" type="registro" label="PLG_SYSTEM_WEBGCONSENT_F_REGISTRO" />
+			</fieldset>
+
+		</fields>
+	</config>
+	<updateservers>
+		<server type="collection" name="WebG Consent">https://raw.githubusercontent.com/WebG-it/webg-consent/main/collection.xml</server>
+	</updateservers>
+</extension>

@@ -1,0 +1,9 @@
+# Local build output
+build/out/
+__pycache__/
+# Test e schermate locali
+.test-secrets
+screenshot/
+# Never commit local environment files or secrets
+*.env
+!*.env.example

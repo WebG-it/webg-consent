@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Update server of WebG Consent: a collection with a single row, as for the other WebG plugins.
+  The row says which version is current; the details (download, sha256) are in updates/webgconsent.xml.
+  At every release change version here and in updates/ (and never reuse a version number).
+  PUBLIC repository: never put tokens, passwords or keys in it.
+-->
+<extensionset name="WebG Consent" description="Plugin Joomla sviluppato da WebG">
+    <extension
+        name="WebG Consent"
+        element="webgconsent"
+        type="plugin"
+        folder="system"
+        version="1.0.0"
+        detailsurl="https://raw.githubusercontent.com/WebG-it/webg-consent/main/updates/webgconsent.xml" />
+</extensionset>
